@@ -1,5 +1,6 @@
 from msvcrt import getch
 from Money import Tanggal
+from konversi_mata_uang import *
 
 def rekapBulananMasuk(user):
     tanggalRekap = Tanggal(0, 0, 0)
