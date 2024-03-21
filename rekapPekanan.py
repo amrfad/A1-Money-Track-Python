@@ -148,3 +148,10 @@ def rekapPekananKeluar(user):
         print("\033[0m")
     else:
         print("\033[132mData Kosong\033[0m")
+
+def isSameWeek(tanggal1, tanggal2) -> bool:
+    equal = False
+    equal = (tanggal1.pekan == tanggal2.pekan)
+    equal = equal and (tanggal1.bulan == tanggal2.bulan)
+    equal = equal and (tanggal1.tahun == tanggal2.tahun)
+    return equal

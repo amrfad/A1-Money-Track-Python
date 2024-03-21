@@ -148,3 +148,9 @@ def tampilMenuRekapBulanan(user):
         rekapBulananMasuk(user)
     else:
         rekapBulananKeluar(user)
+
+def isSameMonth(tanggal1, tanggal2) -> bool:
+    equal=False
+    equal = (tanggal1.bulan == tanggal2.bulan)
+    equal = equal and (tanggal1.tahun == tanggal2.tahun)
+    return equal
