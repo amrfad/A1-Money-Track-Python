@@ -1,4 +1,5 @@
 from text_color import *
+import os
 
 # Dictionary berisi mengenai informasi dari sebuah mata uang
 MATA_UANG = {
@@ -58,7 +59,9 @@ MATA_UANG = {
 # Class untuk Mata Uang
 class MataUang:
     """
-    
+    Kelas ini merepresentasikan sebuah mata uang.
+    Kelas ini memiliki atribut nama, negara, dan kurs.
+    Kelas ini juga memiliki metode untuk mengonversi nominal dari/ke Rupiah.
     """
     def __init__(self, nama):
         self.nama = nama
@@ -120,3 +123,6 @@ def tampil_menu_konversi():
     else:
         nominal = float(input(f"{biru_tebal}Masukkan Nominal IDR yang Ingin Dikonversikan ke {mata_uang.nama}: {default}"))
         cetak_hasil_konversi(mata_uang, nominal, False)
+    print(f"\n{biru_laut}[Klik di mana saja untuk kembali ke menu utama.]{default}")
+    input()
+    os.system('cls')
