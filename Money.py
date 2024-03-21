@@ -7,7 +7,20 @@ class Tanggal:
 
         def showTanggal(self):
              return f"{self.hari}/{self.bulan}/{self.tahun}, Pekan ke-{self.pekan}"
-        
+
+def sumber_dana(sumber_dana):
+    return ("Dompet Digital: " if (sumber_dana == 1) else "Rekening Bank: ")
+
+def kategori(kategori):
+    if (kategori == 1):
+        return "Makanan"
+    elif (kategori == 2):
+        return "Transportasi"
+    elif (kategori == 3):
+        return "Hiburan"
+    else:
+        return "Lain-lain"
+
 class Masuk:
     def __init__(self, waktu, sumber_dana, nominal) -> None:
         self.waktu = waktu
@@ -15,4 +28,15 @@ class Masuk:
         self.nominal = nominal
 
     def showMasuk(self):
-        return f"TRANSAKSI MASUK" + "\n***************\n" + ("Dompet Digital: " if (self.sumber_dana == 1) else "Rekening Bank: ") + f"+Rp. {self.nominal}" + "\n***************"
+        return "TRANSAKSI MASUK" + "\n***************\n" + sumber_dana(self.sumber_dana) + f"+Rp.{self.nominal}" + "\n***************"
+    
+class Keluar:
+    def __init__(self, waktu, sumber_dana, nominal, kategori) -> None:
+        self.waktu = waktu
+        self.sumber_dana = sumber_dana
+        self.nominal = nominal
+        self.kategori = kategori
+
+    def showKeluar(self):
+        return "TRANSAKSI KELUAR" + "\n****************\n" + sumber_dana(self.sumber_dana) + f"-Rp.{self.nominal}\n" + f"Kategori: {kategori(self.kategori)}" + "\n****************"
+    
