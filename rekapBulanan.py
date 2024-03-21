@@ -31,10 +31,10 @@ def rekapBulananMasuk():
         if isSameMonth(tanggalRekap, user.transaksi_masuk[i].waktu):
             print("%02d/%02d/%d\t", user.transaksi_masuk[i].waktu.tanggal, user.transaksi_masuk[i].waktu.bulan, user.transaksi_masuk[i].waktu.tahun)
             formatMataUang(user.transaksi_masuk[i].nominal)
-            print("\t%s", user.transaksi_masuk[i].sumber_dana == 1 ? "Dompet Digital" : "Bank")
+            print("\t%s", "Dompet Digital" if user.transaksi_masuk[i].sumber_dana == 1 else "Bank")
             totalPemasukan += user.transaksi_masuk[i].nominal
-            ada_pemasukan=true
-    if ada_pemasukan==true:
+            ada_pemasukan=True
+    if ada_pemasukan==True:
         print("\033[134mTotal Pemasukan pada Bulan ")
         if tanggalRekap.bulan == 1:
             print("Januari: \033[132m", end="")
@@ -90,7 +90,7 @@ def rekapBulananKeluar(user):
     while tanggalRekap.bulan < 1 or tanggalRekap.bulan > 12:
         print("Tolong masukkan angka yang valid")
         tanggalRekap.bulan = int(input(">> "))
-    tanggalRekap.tahun=user.transaksi_keluar->waktu.tahun
+    tanggalRekap.tahun=user.transaksi_keluar.waktu.tahun
 
     kategori = {"Makanan", "Transportasi", "Hiburan", "Tagihan", "Lain-lain"}
     totalPengeluaran = 0
@@ -101,9 +101,9 @@ def rekapBulananKeluar(user):
         if isSameMonth(tanggalRekap, user.transaksi_keluar[i].waktu):
             print("%02d/%02d/%d\t", tanggalRekap.tanggal, tanggalRekap.bulan, tanggalRekap.tahun)
             formatMataUang(user.transaksi_keluar[i].nominal)
-            print("\t%s\t%s", user.transaksi_keluar[i].sumber_dana == 1 ? "Dompet Digital" : "Bank", kategori[user.transaksi_keluar[i].kategori])
+            print("\t%s\t%s", "Dompet Digital" if user.transaksi_keluar[i].sumber_dana == 1 else "Bank", kategori[user.transaksi_keluar[i].kategori])
             totalPengeluaran += user.transaksi_keluar[i].nominal
-            ada_pengeluaran=True
+            ada_pengeluaran = True
     if ada_pengeluaran==True:
         print("\033[134mTotal Pengeluaran pada Bulan ")
         
