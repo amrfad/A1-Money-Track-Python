@@ -40,7 +40,7 @@ def rekapPekananMasuk(user):
     for i in range(user.indek_masuk):
         if (isSameWeek(tanggalRekap, user.transaksi_masuk[i].waktu)):
             print("%02d/%02d/%d\t", user.transaksi_masuk[i].waktu.tanggal, user.transaksi_masuk[i].waktu.bulan, user.transaksi_masuk[i].waktu.tahun)
-            formatMataUang(user.transaksi_masuk[i].nominal)
+            format_mata_uang(user.transaksi_masuk[i].nominal)
             print("\t%s", "Dompet Digital" if user.transaksi_masuk[i].sumber_dana == 1 else "Bank")
             totalPemasukan += user.transaksi_masuk[i].nominal
             ada_pemasukan=True
@@ -71,7 +71,7 @@ def rekapPekananMasuk(user):
             print("November: \033[132m", end="")
         elif tanggalRekap.bulan == 12:
             print("Desember: \033[132m", end="")
-        formatMataUang(totalPemasukan)
+        format_mata_uang(totalPemasukan)
         print("\033[0m")
     else:
         print("\033[132mData Kosong\033[0m")
@@ -117,7 +117,7 @@ def rekapPekananKeluar(user):
     for i in range(user.indeksKeluar):
         if (isSameWeek(tanggalRekap, user.transaksi_keluar[i].waktu)):
             print("%02d/%02d/%d\t", tanggalRekap.tanggal, tanggalRekap.bulan, tanggalRekap.tahun)
-            formatMataUang(user.transaksi_keluar[i].nominal)
+            format_mata_uang(user.transaksi_keluar[i].nominal)
             print("\t%s\t%s", "Dompet Digital" if user.transaksi_keluar[i].sumber_dana == 1  else "Bank", kategori[user.transaksi_keluar[i].kategori])
             totalPengeluaran += user.transaksi_keluar[i].nominal
             ada_pengeluaran=True
@@ -148,7 +148,7 @@ def rekapPekananKeluar(user):
             print("November: \033[132m", end="")
         elif tanggalRekap.bulan == 12:
             print("Desember: \033[132m", end="")
-        formatMataUang(totalPengeluaran)
+        format_mata_uang(totalPengeluaran)
         print("\033[0m")
     else:
         print("\033[132mData Kosong\033[0m")
