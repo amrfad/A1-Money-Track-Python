@@ -1,3 +1,4 @@
+import time
 import InputProcess as ip
 
 class Tanggal:
@@ -63,10 +64,16 @@ class SaldoUser:
             if (self.dompet_digital >= transaksi_keluar.nominal):
                 self.dompet_digital -= transaksi_keluar.nominal
                 self.total = self.dompet_digital + self.rekening_bank
+            else: 
+                print("Saldo Tidak Mencukupi")
+                time.sleep(3)
         else:
             if (self.rekening_bank >= transaksi_keluar.nominal):
                 self.rekening_bank -= transaksi_keluar.nominal
                 self.total = self.dompet_digital + self.rekening_bank
+            else: 
+                print("Saldo Tidak Mencukupi")
+                time.sleep(3)
     
     def showSaldoUser(self):
         return "SALDO USER\n" + "**********\n" + f"Dompet Digital: Rp.{self.dompet_digital}\n" + f"Rekening Bank: Rp.{self.rekening_bank}\n" + "**********\n" + f"Total: Rp.{self.total}"
@@ -92,8 +99,11 @@ class User:
         self.transaksi_masuk.append(transaksi_masuk)
         transaksi_masuk.showMasuk()
 
-    def transaksiKeluar(self):
-        transaksi_keluar = ip.inputKeluar()
+    def transaksiKeluar(self, transaksi_keluar):
+        if (transaksi_keluar == None):
+            transaksi_keluar = ip.inputKeluar()
+        else:
+            transaksi_keluar = transaksi_keluar
         self.saldo.saldoKeluar(transaksi_keluar=transaksi_keluar)
         transaksi_keluar.showKeluar()
 
