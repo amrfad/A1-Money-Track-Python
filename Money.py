@@ -44,6 +44,4 @@ class User:
     def __init__(self, nama) -> None:
         self.nama = nama
         self.transaksi_masuk = []
-        self.indeksMasuk = 0
         self.transaksi_keluar = []
-        self.indeksKeluar = 0
