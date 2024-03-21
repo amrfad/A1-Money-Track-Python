@@ -1,7 +1,7 @@
 from msvcrt import getch
 from Money import Tanggal
 
-def rekapBulananMasuk():
+def rekapBulananMasuk(user):
     tanggalRekap = Tanggal(0, 0, 0)
     print("Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023)>> ")
     tanggalRekap.tahun = int(input("Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023)\n>> "))
