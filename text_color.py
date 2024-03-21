@@ -1,7 +1,7 @@
 hitam = '\033[0;30m'
 merah = '\033[0;31m'
 hijau = '\033[0;32m'
-coklat = '\033[0;33m'
+kuning = '\033[0;33m'
 biru = '\033[0;34m'
 ungu = '\033[0;35m'
 biru_laut = '\033[0;36m'
