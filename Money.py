@@ -12,7 +12,7 @@ class Tanggal:
              return f"{self.hari}/{self.bulan}/{self.tahun}, Pekan ke-{self.pekan}"
 
 def sumber_dana(sumber_dana):
-    return ("Dompet Digital: " if (sumber_dana == 1) else "Rekening rekening_bank: ")
+    return ("Dompet Digital:" if (sumber_dana == 1) else "Rekening rekening_bank:")
 
 def kategori(kategori):
     if (kategori == 1):
@@ -25,24 +25,24 @@ def kategori(kategori):
         return "Lain-lain"
 
 class Masuk:
-    def __init__(self, waktu, sumber_dana, nominal) -> None:
+    def __init__(self, waktu: Tanggal, sumber_dana, nominal) -> None:
         self.waktu = waktu
         self.sumber_dana = sumber_dana
         self.nominal = nominal
 
     def showMasuk(self):
-        return "TRANSAKSI MASUK" + "\n***************\n" + sumber_dana(self.sumber_dana) + f"+Rp.{self.nominal}" + "\n***************"
+        return self.waktu.showTanggal() + "\n" + f"{sumber_dana(self.sumber_dana)} +Rp.{self.nominal}"
     
 class Keluar:
-    def __init__(self, waktu, sumber_dana, nominal, kategori) -> None:
+    def __init__(self, waktu:Tanggal, sumber_dana, nominal, kategori) -> None:
         self.waktu = waktu
         self.sumber_dana = sumber_dana
         self.nominal = nominal
         self.kategori = kategori
 
     def showKeluar(self):
-        return "TRANSAKSI KELUAR" + "\n****************\n" + sumber_dana(self.sumber_dana) + f"-Rp.{self.nominal}\n" + f"Kategori: {kategori(self.kategori)}" + "\n****************"
-
+        return self.waktu.showTanggal() + "\n" + f"Kategori: {kategori(self.kategori)}" + "\n" + f"{sumber_dana(self.sumber_dana)} -Rp.{self.nominal}"
+    
 class SaldoUser:
     def __init__(self, dompet_digital=0, rekening_bank=0) -> None:
         self.dompet_digital = dompet_digital
@@ -90,11 +90,8 @@ class User:
         print("**********")
         print(self.saldo.showSaldoUser())
 
-    def transaksiMasuk(self, transaksi_masuk):
-        if (transaksi_masuk == None):
-            transaksi_masuk = ip.inputMasuk()
-        else:
-            transaksi_masuk = transaksi_masuk
+    def transaksiMasuk(self):
+        transaksi_masuk = ip.inputMasuk()
         self.saldo.saldoMasuk(transaksi_masuk=transaksi_masuk)
         self.transaksi_masuk.append(transaksi_masuk)
         transaksi_masuk.showMasuk()
@@ -111,12 +108,12 @@ class User:
         print("RIWAYAT TRANSAKSI MASUK")
         print("***********************")
         for transaksi in self.transaksi_masuk:
-            transaksi.showMasuk()
+            print(transaksi.showMasuk())
         print("***********************")
 
     def showRiwayatKeluar(self):
         print("RIWAYAT TRANSAKSI Keluar")
         print("************************")
         for transaksi in self.transaksi_keluar:
-            transaksi.showKeluar()
+            print(transaksi.showKeluar())
         print("************************")
