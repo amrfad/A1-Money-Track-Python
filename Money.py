@@ -40,3 +40,10 @@ class Keluar:
     def showKeluar(self):
         return "TRANSAKSI KELUAR" + "\n****************\n" + sumber_dana(self.sumber_dana) + f"-Rp.{self.nominal}\n" + f"Kategori: {kategori(self.kategori)}" + "\n****************"
     
+class User:
+    def __init__(self, nama) -> None:
+        self.nama = nama
+        self.transaksi_masuk = []
+        self.indeksMasuk = 0
+        self.transaksi_keluar = []
+        self.indeksKeluar = 0
