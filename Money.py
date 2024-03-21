@@ -96,11 +96,8 @@ class User:
         self.transaksi_masuk.append(transaksi_masuk)
         transaksi_masuk.showMasuk()
 
-    def transaksiKeluar(self, transaksi_keluar):
-        if (transaksi_keluar == None):
-            transaksi_keluar = ip.inputKeluar()
-        else:
-            transaksi_keluar = transaksi_keluar
+    def transaksiKeluar(self):
+        transaksi_keluar = ip.inputKeluar()
         self.saldo.saldoKeluar(transaksi_keluar=transaksi_keluar)
         transaksi_keluar.showKeluar()
 
