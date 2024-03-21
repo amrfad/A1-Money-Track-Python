@@ -1,4 +1,6 @@
+from os import getch
 from Money import Tanggal
+from konversi_mata_uang import *
 
 def rekapPekananMasuk(user):
     tanggalRekap = Tanggal(0, 0, 0)
@@ -73,6 +75,8 @@ def rekapPekananMasuk(user):
         print("\033[0m")
     else:
         print("\033[132mData Kosong\033[0m")
+    print("Ketik apapun untuk kembali ke menu awal.")
+    getch()
 
 def rekapPekananKeluar(user):
     tanggalRekap = Tanggal(0, 0, 0)
@@ -148,6 +152,8 @@ def rekapPekananKeluar(user):
         print("\033[0m")
     else:
         print("\033[132mData Kosong\033[0m")
+    print("Ketik apapun untuk kembali ke menu awal.")
+    getch()
 
 def isSameWeek(tanggal1, tanggal2) -> bool:
     equal = False
