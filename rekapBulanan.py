@@ -131,7 +131,7 @@ def rekapBulananKeluar(user):
             print("November: \033[132m", end="")
         elif tanggalRekap.bulan == 12:
             print("Desember: \033[132m", end="")
-        formatMataUang((double) totalPengeluaran)
+        formatMataUang(totalPengeluaran)
         print("\033[0m")
     else:
         print("\033[132mData Kosong\033[0m")
@@ -140,21 +140,11 @@ def rekapBulananKeluar(user):
 
 
 def tampilMenuRekapBulanan(user):
-    // void(*tab[2])(User user, Tanggal tanggalRekap) = {&rekapPekananMasuk, &rekapPekananKeluar}
     print("\033[134mPilihan Mode Rekap Bulanan:\033[0m")
     print("\033[132m[1]\033[0m Rekap Bulanan Transaksi Masuk")
     print("\033[132m[2]\033[0m Rekap Bulanan Transaksi Keluar")
-    print("\033[134mPilih Mode: \033[0m")
-    int choice
-    scanf(" %d", &choice)
-
-    switch (choice)
-    {
-        case 1:
-            rekapBulananMasuk(user)
-            break
-        case 2:
-            rekapBulananKeluar(user)
-            break
-    }
-}
+    choice = int(input("\033[134mPilih Mode: \033[0m"))
+    if choice == 1:
+        rekapBulananMasuk(user)
+    else:
+        rekapBulananKeluar(user)
