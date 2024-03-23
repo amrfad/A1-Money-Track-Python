@@ -8,7 +8,7 @@ from konversi_mata_uang import *
 def rekapBulananMasuk(user):
     tanggalRekap = Tanggal(0, 0, 0)
     print(f"{hijau_tebal}Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023){default}")
-    tanggalRekap.tahun = int(input(">>"))
+    tanggalRekap.tahun = int(input(">> "))
     print(f"{hijau_tebal}Masukkan bulan yang ingin ditampilkan data rekapnya. (Silakan masukkan angkanya saja){biru_laut}")
     print("1. Januari")
     print("2. Februari")
