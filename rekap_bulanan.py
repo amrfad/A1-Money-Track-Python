@@ -131,7 +131,7 @@ def rekapBulananKeluar(user):
             print("November: ", end="")
         elif tanggalRekap.bulan == 12:
             print("Desember: ", end="")
-        print(f"{hijau_tebal}{format_mata_uang(total_pemasukan)}{default}")
+        print(f"{hijau_tebal}{format_mata_uang(total_pengeluaran)}{default}")
     else:
         print(f"{kuning_tebal}Data Kosong{default}")
     print("Tekan apapun untuk kembali ke menu awal.")
