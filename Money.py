@@ -151,12 +151,16 @@ class User:
         pilihan = int(input("Masukkan pilihan anda: "))
 
         if pilihan == 1:
-            self.read_from_file()
-            self.transaksiMasuk()
+            try :
+                self.read_from_file()
+            except FileNotFoundError:
+                self.transaksiMasuk()
             
         elif pilihan == 2:
-            self.read_from_file()
-            self.transaksiKeluar()
+            try :
+                self.read_from_file()
+            except FileNotFoundError:
+                self.transaksiKeluar()
             
 
     def showRiwayatMasuk(self):

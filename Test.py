@@ -10,8 +10,7 @@ from Money import *
 
 
 user = User("Agus")
-
+# user.catatTransaksi()
 
 # user.showRiwayatMasuk()
 user.loadFullData()
-
