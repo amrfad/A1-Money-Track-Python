@@ -9,6 +9,7 @@ user = User('init_name')
 
 if __name__ == '__main__':
     while(True):
+        os.system('cls')
         cetak_banner()
         user.read_from_file()
         print(f"{biru_tebal}SELAMAT DATANG DI APLIKASI MONEY TRACKING!{default}\n")
