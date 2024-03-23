@@ -56,7 +56,7 @@ def laporanTahunan(current_user, kategori, tahun):
             print(f"     Rata-rata {"pengeluaran" if (kategori.lower()=="keluar") else "pemasukan"}: {hitungRataRata(bulan[i])}")
         else:
             print(f"Bulan {translateBulan(i)} Tahun {tahun}")
-            print("     Belum ada pengeluaran.")
+            print(f"     Belum ada {"pengeluaran" if (kategori.lower()=="keluar") else "pemasukan"}.")
 
     print(f"{biru_tebal} ===== CLICK ENTER =====")
 
