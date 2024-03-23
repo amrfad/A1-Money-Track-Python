@@ -23,7 +23,6 @@ def rekapBulananMasuk(user):
     while tanggalRekap.bulan < 1 or tanggalRekap.bulan > 12:
         print("Tolong masukkan angka yang valid")
         tanggalRekap.bulan = int(input(">> "))
-    # tanggalRekap.tahun=user.transaksi_masuk->waktu.tahun
     
     ada_pemasukan = False
     totalPemasukan = 0

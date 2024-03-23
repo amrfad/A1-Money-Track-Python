@@ -31,8 +31,6 @@ def rekapPekananMasuk(user):
     while (tanggalRekap.pekan != 1 and tanggalRekap.pekan != 2 and tanggalRekap.pekan != 3 and tanggalRekap.pekan != 4):
         print("Tolong masukkan angka yang valid")
         tanggalRekap.pekan = int(input(">> "))
-    
-    tanggalRekap.tahun=user.transaksi_masu.waktu.tahun
 
     totalPemasukan = 0
     ada_pemasukan=False
