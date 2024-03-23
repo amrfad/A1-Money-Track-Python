@@ -42,9 +42,9 @@ class Masuk:
         print(f"\t\t{hijau_tebal}Transaksi Berhasil{default}")
         print("\033[0m----------------------------------------------\n")
         print(f"Tanggal \t\t: \t{self.waktu.showTanggal()}")
-        print(f"Nominal \t\t: \t{ungu_tebal}Rp. {self.nominal}{default}")
-        print(f"Sumber dana \t\t: \t{sumber_dana(self.sumber_dana)}")
-        print(f"\n\t====== {biru_laut}Hemat Pangkal Kaya{default} ======\n")
+        print(f"Nominal \t\t: \t{kuning}Rp. {self.nominal}{default}")
+        print(f"Sumber dana \t\t: \t{ungu}{sumber_dana(self.sumber_dana)}{default}")
+        print(f"\n\t====== {biru_laut_tebal}Hemat Pangkal Kaya{default} ======\n")
         input("Tekan Enter untuk melanjutkan!")
     
 class Keluar:
@@ -59,13 +59,13 @@ class Keluar:
     
     def showSuccessOut(self):
         print("\033[0m----------------------------------------------")
-        print("\t\tTransaksi Berhasil")
+        print(f"\t\t{hijau_tebal}Transaksi Berhasil{default}")
         print("\033[0m----------------------------------------------\n")
         print(f"Tanggal \t\t: \t{self.waktu.showTanggal()}")
-        print(f"Nominal \t\t: \tRp. {self.nominal}")
-        print(f"Sumber dana \t\t: \t{sumber_dana(self.sumber_dana)}")
-        print(f"Kategori \t\t: \t{kategori(self.kategori)}")
-        print("\n\t====== Hemat Pangkal Kaya ======\n")
+        print(f"Nominal \t\t: \t{kuning}Rp. {self.nominal}{default}")
+        print(f"Sumber dana \t\t: \t{ungu}{sumber_dana(self.sumber_dana)}{default}")
+        print(f"Kategori \t\t: \t{biru}{kategori(self.kategori)}{default}")
+        print(f"\n\t====== {biru_laut_tebal}Hemat Pangkal Kaya{default} ======\n")
         input("Tekan Enter untuk melanjutkan!")
     
 class SaldoUser:
@@ -89,6 +89,7 @@ class SaldoUser:
             if (self.dompet_digital >= transaksi_keluar.nominal):
                 self.dompet_digital -= transaksi_keluar.nominal
                 self.total = self.dompet_digital + self.rekening_bank
+                transaksi_keluar.showSuccessOut
             else: 
                 print("Saldo Tidak Mencukupi")
                 time.sleep(3)
@@ -127,7 +128,6 @@ class User:
         transaksi_keluar = ip.inputKeluar()
         self.saldo.saldoKeluar(transaksi_keluar=transaksi_keluar)
         self.transaksi_keluar.append(transaksi_keluar)
-        transaksi_keluar.showSuccessOut()
         transaksi_keluar.showKeluar()
         self.save_to_file()
            
@@ -147,8 +147,8 @@ class User:
         print("-------------------------------")
         print("\033[32mAyo Catat Keuangan Anda \033[34mdisini\033[0m")
         print("-------------------------------")
-        print("(1) Pemasukan")
-        print("(2) Pengeluaran")
+        print(f"{biru_laut_tebal}[{default}1{biru_laut_tebal}]{default} Pemasukan")
+        print(f"{biru_laut_tebal}[{default}2{biru_laut_tebal}]{default} Pengeluaran")
         pilihan = int(input("Masukkan pilihan anda: "))
 
         if pilihan == 1:
@@ -162,8 +162,8 @@ class User:
             try :
                 self.read_from_file()
             except FileNotFoundError:
-                self.transaksiKeluar()
-            
+                pass
+            self.transaksiKeluar()
     def showRiwayatMasuk(self):
         for transaksi in self.transaksi_masuk:
             print(f"{transaksi.showMasuk()}\n")
@@ -177,14 +177,15 @@ class User:
         
     def loadFullData(self):
         self.read_from_file()
-        print("\n========= \033[32mDETAIL TRANSAKSI\033[0m =========\n")
+        print(f"\n========= {hijau_tebal}DETAIL TRANSAKSI{default} =========\n")
+        print(f"Jumlah saldo keseluruhan: {kuning}Rp. {(self.saldo.total)},00{default}\n")
         print(f"Jumlah Transaksi Masuk: {len(self.transaksi_masuk)}\n")
         print(f"Jumlah Transaksi Keluar: {len(self.transaksi_keluar)}\n")
         
         if(len(self.transaksi_masuk) > 0):
-            print("===== \033[32mTransaksi Masuk\033[0m =====\n")
+            print(f"===== {biru_laut_tebal}Transaksi Masuk{default} =====\n")
             self.showRiwayatMasuk()
         if(len(self.transaksi_keluar) > 0):    
-            print("===== \033[32mTransaksi Keluar\033[0m =====\n")
+            print(f"===== {biru_laut_tebal}Transaksi Keluar{default} =====\n")
             self.showRiwayatKeluar()
         
