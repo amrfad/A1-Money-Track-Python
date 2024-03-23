@@ -2,14 +2,15 @@ from konversi_mata_uang import *
 from rekap_harian import *
 import os
 from menu import *
+from fiturLaporan import *
 
 # load user
 user = User('init_name')
 
-
 if __name__ == '__main__':
     while(True):
         cetak_banner()
+        user.read_from_file()
         print(f"{biru_tebal}SELAMAT DATANG DI APLIKASI MONEY TRACKING!{default}\n")
         print(f"Halo, {kuning}{user.nama}{default}. Saldo Totalmu Adalah: {biru_laut} {format_mata_uang(user.saldo.total)}{default}")
         cetak_menu_utama()
@@ -40,6 +41,8 @@ if __name__ == '__main__':
             tampil_menu_konversi()
         elif pilihan == '8':
             cetak_banner()
+            inputLaporan(user=user)
+            input()
             pass
         elif pilihan == '0':
             exit()

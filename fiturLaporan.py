@@ -1,15 +1,12 @@
 # from InputProcess import *
 from Money import *
-import random
-import math
-import time
-import os
+from konversi_mata_uang import format_mata_uang
 
 def hitungRataRata(list):
     total = 0
     for data in list:
         total += data.nominal
-    return total//len(list)
+    return format_mata_uang(total//len(list))
 
 def translateBulan(bulan):
     nama_bulan = {
