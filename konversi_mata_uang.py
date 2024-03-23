@@ -114,8 +114,8 @@ def tampil_menu_konversi():
     for i, mata_uang in enumerate(MATA_UANG):
         print(f"{hijau_tebal}[{mata_uang:3s}]{default}\t{MATA_UANG[mata_uang]['Negara']:20s}\t{format_mata_uang(MATA_UANG[mata_uang]['Kurs'])}")
     mata_uang = MataUang(input(f'{biru_tebal}Pilih Mata Uang: {default}').upper())
-    print(f"{hijau_tebal}[1]{default} Konversi dari Rupiah ke Mata Uang Asing")
-    print(f"{hijau_tebal}[2]{default} Konversi dari Mata Uang Asing ke Rupiah")
+    print(f"{hijau_tebal}[1]{default} Konversi dari Mata Uang Asing ke Rupiah")
+    print(f"{hijau_tebal}[2]{default} Konversi dari Rupiah ke Mata Uang Asing")
     mode_konversi = int(input(f"{biru_tebal}Masukkan Pilihanmu: {default}"))
     if mode_konversi == 1:
         nominal = float(input(f"{biru_tebal}Masukkan Nominal {mata_uang.nama} yang Ingin Dikonversikan ke IDR: {default}"))
