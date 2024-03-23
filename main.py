@@ -3,12 +3,15 @@ from rekap_harian import *
 import os
 from menu import *
 from fiturLaporan import *
+from rekap_pekanan import *
+from rekap_bulanan import *
 
 # load user
 user = User('init_name')
 
 if __name__ == '__main__':
     while(True):
+        os.system('cls')
         cetak_banner()
         user.read_from_file()
         print(f"{biru_tebal}SELAMAT DATANG DI APLIKASI MONEY TRACKING!{default}\n")
@@ -29,9 +32,11 @@ if __name__ == '__main__':
             tampil_menu_rekap_harian(user)
         elif pilihan == '4':
             cetak_banner()
+            tampil_menu_rekap_pekanan(user)
             pass
         elif pilihan == '5':
             cetak_banner()
+            tampil_menu_rekap_bulanan(user)
             pass
         elif pilihan == '6':
             cetak_banner()
