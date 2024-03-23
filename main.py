@@ -10,13 +10,15 @@ user = User('init_name')
 if __name__ == '__main__':
     while(True):
         cetak_banner()
-        cetak_menu_utama(user)
+        print(f"{biru_tebal}SELAMAT DATANG DI APLIKASI MONEY TRACKING!{default}\n")
+        print(f"Halo, {kuning}{user.nama}{default}. Saldo Totalmu Adalah: {biru_laut} {format_mata_uang(user.saldo.total)}{default}")
+        cetak_menu_utama()
         pilihan = input("Masukkan pilihan anda: ")
         os.system('cls')
 
         if pilihan == '1':
             cetak_banner()
-            pass
+            user.catatTransaksi()
         elif pilihan == '2':
             cetak_banner()
             pass
@@ -31,7 +33,8 @@ if __name__ == '__main__':
             pass
         elif pilihan == '6':
             cetak_banner()
-            pass
+            user.loadFullData()
+            input()
         elif pilihan == '7':
             cetak_banner()
             tampil_menu_konversi()

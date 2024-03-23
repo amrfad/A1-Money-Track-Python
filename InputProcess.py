@@ -2,6 +2,7 @@ import datetime
 import os
 from Money import * 
 from text_color import *
+from menu import *
 
 # Input Tanggal S T A R T
 def isValidTanggal(tahun, bulan, tanggal):
@@ -39,6 +40,7 @@ def inputTanggal():
 
     while(not isValidTanggal(tahun=tahun, bulan=bulan, tanggal=hari)):
         os.system('cls')
+        cetak_banner()
         print(f"Masukkan Tanggal Transaksi: \n[{biru_laut}dd{default} {hijau}m{default} {kuning}yyyy{default}]")
         user_input = input(f"\n{hijau}>>{default} ").split()
         hari = int(user_input[0])
@@ -54,6 +56,7 @@ def inputMasuk():
     waktu_transaksi = inputTanggal()
     sumber_dana = 0
     os.system('cls')
+    cetak_banner()
     print("Sumber Dana\n")
     print(f"{biru_laut_tebal}[{default}1{biru_laut_tebal}]{default} Dompet Digital")
     print(f"{biru_laut_tebal}[{default}2{biru_laut_tebal}]{default} Rekening Bank")
@@ -72,6 +75,7 @@ def inputMasuk():
 def inputKeluar():
     waktu_transaksi = inputTanggal()
     os.system('cls')
+    cetak_banner()
     print("Sumber Dana")
     print(f"{biru_laut_tebal}[{default}1{biru_laut_tebal}]{default} Dompet Digital")
     print(f"{biru_laut_tebal}[{default}2{biru_laut_tebal}]{default} Rekening Bank")

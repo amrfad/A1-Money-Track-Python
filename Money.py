@@ -3,6 +3,7 @@ import InputProcess as ip
 import os
 import pickle
 from text_color import *
+from konversi_mata_uang import *
 
 class Tanggal:
         def __init__(self, tahun, bulan, hari):
@@ -34,7 +35,7 @@ class Masuk:
         self.nominal = nominal
 
     def showMasuk(self):
-        return self.waktu.showTanggal() + "\n" + f"{sumber_dana(self.sumber_dana)} +Rp.{self.nominal}"
+        return self.waktu.showTanggal() + "\n" + f"{sumber_dana(self.sumber_dana)} +{format_mata_uang(self.nominal)}"
     
     def showSuccess(self):
         os.system('cls')
@@ -42,7 +43,7 @@ class Masuk:
         print(f"\t\t{hijau_tebal}Transaksi Berhasil{default}")
         print("\033[0m----------------------------------------------\n")
         print(f"Tanggal \t\t: \t{self.waktu.showTanggal()}")
-        print(f"Nominal \t\t: \t{kuning}Rp. {self.nominal}{default}")
+        print(f"Nominal \t\t: \t{kuning}{format_mata_uang(self.nominal)}{default}")
         print(f"Sumber dana \t\t: \t{ungu}{sumber_dana(self.sumber_dana)}{default}")
         print(f"\n\t====== {biru_laut_tebal}Hemat Pangkal Kaya{default} ======\n")
         input("Tekan Enter untuk melanjutkan!")
@@ -55,14 +56,14 @@ class Keluar:
         self.kategori = kategori
 
     def showKeluar(self):
-        return self.waktu.showTanggal() + "\n" + f"Kategori: {kategori(self.kategori)}" + "\n" + f"{sumber_dana(self.sumber_dana)} -Rp.{self.nominal}"
+        return self.waktu.showTanggal() + "\n" + f"Kategori: {kategori(self.kategori)}" + "\n" + f"{sumber_dana(self.sumber_dana)} -{format_mata_uang(self.nominal)}"
     
     def showSuccessOut(self):
         print("\033[0m----------------------------------------------")
         print(f"\t\t{hijau_tebal}Transaksi Berhasil{default}")
         print("\033[0m----------------------------------------------\n")
         print(f"Tanggal \t\t: \t{self.waktu.showTanggal()}")
-        print(f"Nominal \t\t: \t{kuning}Rp. {self.nominal}{default}")
+        print(f"Nominal \t\t: \t{kuning} {format_mata_uang(self.nominal)}{default}")
         print(f"Sumber dana \t\t: \t{ungu}{sumber_dana(self.sumber_dana)}{default}")
         print(f"Kategori \t\t: \t{biru}{kategori(self.kategori)}{default}")
         print(f"\n\t====== {biru_laut_tebal}Hemat Pangkal Kaya{default} ======\n")
@@ -102,7 +103,7 @@ class SaldoUser:
                 time.sleep(3)
     
     def showSaldoUser(self):
-        return "SALDO USER\n" + "**********\n" + f"Dompet Digital: Rp.{self.dompet_digital}\n" + f"Rekening Bank: Rp.{self.rekening_bank}\n" + "**********\n" + f"Total: Rp.{self.total}"
+        return "SALDO USER\n" + "**********\n" + f"Dompet Digital: Rp.{self.dompet_digital}\n" + f"Rekening Bank: Rp.{self.rekening_bank}\n" + "**********\n" + f"Total: {format_mata_uang(self.total)}"
 
 class User:
     def __init__(self, nama:str) -> None:
@@ -178,7 +179,7 @@ class User:
     def loadFullData(self):
         self.read_from_file()
         print(f"\n========= {hijau_tebal}DETAIL TRANSAKSI{default} =========\n")
-        print(f"Jumlah saldo keseluruhan: {kuning}Rp. {(self.saldo.total)},00{default}\n")
+        print(f"Jumlah saldo keseluruhan: {kuning}{format_mata_uang(self.saldo.total)}{default}\n")
         print(f"Jumlah Transaksi Masuk: {len(self.transaksi_masuk)}\n")
         print(f"Jumlah Transaksi Keluar: {len(self.transaksi_keluar)}\n")
         

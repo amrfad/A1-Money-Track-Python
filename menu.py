@@ -1,12 +1,6 @@
 from text_color import *
-from InputProcess import *
-from Money import *
-from konversi_mata_uang import *
-from rekap_harian import *
 
-def cetak_menu_utama(user: User):
-    print(f"{biru_tebal}SELAMAT DATANG DI APLIKASI MONEY TRACKING!{default}\n")
-    print(f"Halo, {kuning}{user.nama}{default}. Saldo Totalmu Adalah: {biru_laut}Rp. {format_mata_uang(user.saldo.total)}{default}")
+def cetak_menu_utama():
     print(f"{hijau}[1]{default} Catat Transaksi Baru")
     print(f"{hijau}[2]{default} Cek Saldo")
     print(f"{hijau}[3]{default} Tunjukkan Rekap Harian")
