@@ -14,6 +14,7 @@ if __name__ == '__main__':
         os.system('cls')
         cetak_banner()
         user.read_from_file()
+        user.nama = 'Pak Asep'
         print(f"{biru_tebal}SELAMAT DATANG DI APLIKASI MONEY TRACKING!{default}\n")
         print(f"Halo, {kuning}{user.nama}{default}. Saldo Totalmu Adalah: {biru_laut} {format_mata_uang(user.saldo.total)}{default}")
         cetak_menu_utama()
