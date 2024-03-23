@@ -103,7 +103,7 @@ class SaldoUser:
                 time.sleep(3)
     
     def showSaldoUser(self):
-        return "SALDO USER\n" + "**********\n" + f"Dompet Digital: Rp.{self.dompet_digital}\n" + f"Rekening Bank: Rp.{self.rekening_bank}\n" + "**********\n" + f"Total: {format_mata_uang(self.total)}"
+        return "SALDO USER\n" + "**********\n" + f"Dompet Digital: {format_mata_uang(self.dompet_digital)}\n" + f"Rekening Bank: {format_mata_uang(self.rekening_bank)}\n" + "**********\n" + f"Total: {format_mata_uang(self.total)}"
 
 class User:
     def __init__(self, nama:str) -> None:
@@ -116,6 +116,8 @@ class User:
         print(f"{self.nama}")
         print("**********")
         print(self.saldo.showSaldoUser())
+        print(f"{biru_tebal} ===== CLICK ENTER =====")
+        input()
 
     def transaksiMasuk(self):
         transaksi_masuk = ip.inputMasuk()

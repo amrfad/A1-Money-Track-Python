@@ -22,6 +22,7 @@ if __name__ == '__main__':
             user.catatTransaksi()
         elif pilihan == '2':
             cetak_banner()
+            user.showInfo()
             pass
         elif pilihan == '3':
             cetak_banner()

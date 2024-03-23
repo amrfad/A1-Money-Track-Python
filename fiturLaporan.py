@@ -58,6 +58,8 @@ def laporanTahunan(current_user, kategori, tahun):
             print(f"Bulan {translateBulan(i)} Tahun {tahun}")
             print("     Belum ada pengeluaran.")
 
+    print(f"{biru_tebal} ===== CLICK ENTER =====")
+
 def inputLaporan(user):
     print("FITUR LAPORAN")
     print("Pilih Kategori: 1. Pemasukan/ 2. Pengeluaran")
