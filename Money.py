@@ -2,6 +2,7 @@ import time
 import InputProcess as ip
 import os
 import pickle
+from text_color import *
 
 class Tanggal:
         def __init__(self, tahun, bulan, hari):
@@ -14,7 +15,7 @@ class Tanggal:
              return f"{self.hari}/{self.bulan}/{self.tahun}, Pekan ke-{self.pekan}"
 
 def sumber_dana(sumber_dana):
-    return ("Dompet Digital:" if (sumber_dana == 1) else "Rekening rekening_bank:")
+    return ("Dompet Digital" if (sumber_dana == 1) else "Rekening rekening_bank")
 
 def kategori(kategori):
     if (kategori == 1):
@@ -38,12 +39,12 @@ class Masuk:
     def showSuccess(self):
         os.system('cls')
         print("\033[0m----------------------------------------------")
-        print("\t\tTransaksi Berhasil")
+        print(f"\t\t{hijau_tebal}Transaksi Berhasil{default}")
         print("\033[0m----------------------------------------------\n")
         print(f"Tanggal \t\t: \t{self.waktu.showTanggal()}")
-        print(f"Nominal \t\t: \tRp. {self.nominal}")
+        print(f"Nominal \t\t: \t{ungu_tebal}Rp. {self.nominal}{default}")
         print(f"Sumber dana \t\t: \t{sumber_dana(self.sumber_dana)}")
-        print("\n\t====== Hemat Pangkal Kaya ======\n")
+        print(f"\n\t====== {biru_laut}Hemat Pangkal Kaya{default} ======\n")
         input("Tekan Enter untuk melanjutkan!")
     
 class Keluar:
@@ -154,7 +155,8 @@ class User:
             try :
                 self.read_from_file()
             except FileNotFoundError:
-                self.transaksiMasuk()
+                pass
+            self.transaksiMasuk()
             
         elif pilihan == 2:
             try :
@@ -162,7 +164,6 @@ class User:
             except FileNotFoundError:
                 self.transaksiKeluar()
             
-
     def showRiwayatMasuk(self):
         for transaksi in self.transaksi_masuk:
             print(f"{transaksi.showMasuk()}\n")
