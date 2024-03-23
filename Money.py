@@ -2,7 +2,7 @@ import time
 import InputProcess as ip
 import os
 import pickle
-
+global_index = 0
 class Tanggal:
         def __init__(self, tahun, bulan, hari):
             self.hari = hari
@@ -56,6 +56,17 @@ class Keluar:
     def showKeluar(self):
         return self.waktu.showTanggal() + "\n" + f"Kategori: {kategori(self.kategori)}" + "\n" + f"{sumber_dana(self.sumber_dana)} -Rp.{self.nominal}"
     
+    def showSuccessOut(self):
+        print("\033[0m----------------------------------------------")
+        print("\t\tTransaksi Berhasil")
+        print("\033[0m----------------------------------------------\n")
+        print(f"Tanggal \t\t: \t{self.waktu.showTanggal()}")
+        print(f"Nominal \t\t: \tRp. {self.nominal}")
+        print(f"Sumber dana \t\t: \t{sumber_dana(self.sumber_dana)}")
+        print(f"Kategori \t\t: \t{kategori(self.kategori)}")
+        print("\n\t====== Hemat Pangkal Kaya ======\n")
+        input("Tekan Enter untuk melanjutkan!")
+    
 class SaldoUser:
     def __init__(self, dompet_digital=0, rekening_bank=0) -> None:
         self.dompet_digital = dompet_digital
@@ -106,11 +117,22 @@ class User:
     def transaksiMasuk(self):
         transaksi_masuk = ip.inputMasuk()
         self.saldo.saldoMasuk(transaksi_masuk=transaksi_masuk)
-        
         self.transaksi_masuk.append(transaksi_masuk)
         transaksi_masuk.showSuccess()
         transaksi_masuk.showMasuk()
-    
+        self.save_to_file()
+        global global_index
+        global_index += 1
+        
+    def transaksiKeluar(self):
+        transaksi_keluar = ip.inputKeluar()
+        self.saldo.saldoKeluar(transaksi_keluar=transaksi_keluar)
+        self.transaksi_keluar.append(transaksi_keluar)
+        transaksi_keluar.showSuccessOut()
+        transaksi_keluar.showKeluar()
+        self.save_to_file()
+        global_index +=1     
+           
     def save_to_file(self):
         with open("User.DAT", "wb") as file:
             pickle.dump(self, file)
@@ -123,32 +145,7 @@ class User:
             self.transaksi_keluar = tampung.transaksi_keluar
             self.transaksi_masuk = tampung.transaksi_masuk
         
-
-            
-    # def save_to_file_masuk(self):
-    #     with open("UserMasuk.txt", "w") as file:
-    #         for i, transaksi in enumerate(self.transaksi_masuk):
-    #             if transaksi is not None:
-    #                 file.write(f"{transaksi},{'Dompet Digital' if transaksi.sumber_dana == 1 else 'Bank'},{transaksi.nominal:.2f}\n")
-    
-    def transaksiKeluar(self):
-        transaksi_keluar = ip.inputKeluar()
-        self.saldo.saldoKeluar(transaksi_keluar=transaksi_keluar)
-        transaksi_keluar.showKeluar()
-        
-    # def save_to_file_keluar(self):
-    #     with open("UserKeluar.DAT", "w") as file:
-    #         file.write(f"Nama: {self.nama}\n")
-    #         file.write(f"Saldo Dompet Digital: {self.saldo.dompet_digital:.2f}\n")
-    #         file.write(f"Saldo Bank: {self.saldo.bank:.2f}\n")
-    #         file.write(f"Saldo Total: {self.saldo.total:.2f}\n")
-    #         file.write("Transaksi Keluar:\n")
-    #         for i, transaksi in enumerate(self.transaksi_keluar):
-    #             if transaksi is not None:
-    #                 file.write(f"{i + 1}. {transaksi.waktu} | Sumber Dana: {'Dompet Digital' if transaksi.sumber_dana == 1 else 'Bank'} | Nominal: {transaksi.nominal:.2f} | Kategori: {kategori}\n")
-    
     def catatTransaksi(self):
-        self.read_from_file()
         print("-------------------------------")
         print("\033[32mAyo Catat Keuangan Anda \033[34mdisini\033[0m")
         print("-------------------------------")
@@ -157,11 +154,15 @@ class User:
         pilihan = int(input("Masukkan pilihan anda: "))
 
         if pilihan == 1:
+            if(global_index != 0):
+                self.read_from_file()
             self.transaksiMasuk()
-            self.save_to_file()
+            
         elif pilihan == 2:
+            if (global_index != 0):
+                self.read_from_file()
             self.transaksiKeluar()
-            # self.save_to_file()
+            
 
     def showRiwayatMasuk(self):
         print("RIWAYAT TRANSAKSI MASUK")
@@ -176,4 +177,16 @@ class User:
         for transaksi in self.transaksi_keluar:
             print(transaksi.showKeluar())
         print("************************")
+        
+    def loadFullData(self):
+        self.read_from_file()
+        print("\n========= \033[32mDETAIL TRANSAKSI\033[0m =========\n\n")
+        print(f"Jumlah Transaksi Masuk: {len(self.transaksi_masuk)}\n")
+        print(f"Jumlah Transaksi Keluar: {len(self.transaksi_keluar)}")
+        
+        print("===== \033[32mTransaksi Masuk\033[0m =====\n\n")
+        self.showRiwayatMasuk()
+        
+        print("===== \033[32mTransaksi Keluar\033[0m =====\n\n")
+        self.showRiwayatKeluar
         
