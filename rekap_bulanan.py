@@ -1,12 +1,15 @@
 from msvcrt import getch
+import re
+from konversi_mata_uang import *
+from InputProcess import *
 from Money import Tanggal
 from konversi_mata_uang import *
 
 def rekapBulananMasuk(user):
     tanggalRekap = Tanggal(0, 0, 0)
-    print("Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023)>> ")
-    tanggalRekap.tahun = int(input("Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023)\n>> "))
-    print("Masukkan bulan yang ingin ditampilkan data rekapnya. (Silakan masukkan angkanya saja)")
+    print(f"{hijau_tebal}Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023){default}")
+    tanggalRekap.tahun = int(input(">>"))
+    print(f"{hijau_tebal}Masukkan bulan yang ingin ditampilkan data rekapnya. (Silakan masukkan angkanya saja){biru_laut}")
     print("1. Januari")
     print("2. Februari")
     print("3. Maret")
@@ -18,62 +21,60 @@ def rekapBulananMasuk(user):
     print("9. September")
     print("10. Oktober")
     print("11. November")
-    print("12. Desember")
+    print(f"12. Desember{default}")
     tanggalRekap.bulan = int(input(">> "))
     while tanggalRekap.bulan < 1 or tanggalRekap.bulan > 12:
-        print("Tolong masukkan angka yang valid")
+        print(f"{merah}Tolong masukkan angka yang valid{default}")
         tanggalRekap.bulan = int(input(">> "))
     
     ada_pemasukan = False
-    totalPemasukan = 0
-    print("\033[134m%-10s\t%-10s\t%s\033[0m", "Tanggal", "Nominal", "Sumber Dana")
-    for i in range(user.indeksMasuk):
-        if isSameMonth(tanggalRekap, user.transaksi_masuk[i].waktu):
-            print("%02d/%02d/%d\t", user.transaksi_masuk[i].waktu.tanggal, user.transaksi_masuk[i].waktu.bulan, user.transaksi_masuk[i].waktu.tahun)
-            format_mata_uang(user.transaksi_masuk[i].nominal)
-            print("\t%s", "Dompet Digital" if user.transaksi_masuk[i].sumber_dana == 1 else "Bank")
-            totalPemasukan += user.transaksi_masuk[i].nominal
+    total_pemasukan = 0
+    print((biru_tebal + "{0:10s}\t{1:20s}\t{2}" + default).format("Tanggal", "Nominal", "Sumber Dana"))
+    for transaksi in user.transaksi_masuk:
+        if isSameMonth(tanggalRekap, transaksi.waktu):
+            print((default + "{0:10s}\t{1:20s}\t{2}").format(re.sub(r', Pekan ke-\d+', '', transaksi.waktu.showTanggal()), 
+                                                             format_mata_uang(transaksi.nominal), transaksi.sumber_dana))
+            total_pemasukan += transaksi.nominal
             ada_pemasukan=True
     if ada_pemasukan==True:
-        print("\033[134mTotal Pemasukan pada Bulan ")
+        print(f"{biru_tebal}Total pemasukan pada bulan ", end="")
         if tanggalRekap.bulan == 1:
-            print("Januari: \033[132m", end="")
+            print("Januari: ", end="")
         elif tanggalRekap.bulan == 2:
-            print("Februari: \033[132m", end="")
+            print("Februari: ", end="")
         elif tanggalRekap.bulan == 3:
-            print("Maret: \033[132m", end="")
+            print("Maret: ", end="")
         elif tanggalRekap.bulan == 4:
-            print("April: \033[132m", end="")
+            print("April: ", end="")
         elif tanggalRekap.bulan == 5:
-            print("Mei: \033[132m",end="")
+            print("Mei: ",end="")
         elif tanggalRekap.bulan == 6:
-            print("Juni: \033[132m", end="")
+            print("Juni: ", end="")
         elif tanggalRekap.bulan == 7:
-            print("Juli: \033[132m", end="")
+            print("Juli: ", end="")
         elif tanggalRekap.bulan == 8:
-            print("Agustus: \033[132m", end="")
+            print("Agustus: ", end="")
         elif tanggalRekap.bulan == 9:
-            print("September: \033[132m", end="")
+            print("September: ", end="")
         elif tanggalRekap.bulan == 10:
-            print("Oktober: \033[132m", end="")
+            print("Oktober: ", end="")
         elif tanggalRekap.bulan == 11:
-            print("November: \033[132m", end="")
+            print("November: ", end="")
         elif tanggalRekap.bulan == 12:
-            print("Desember: \033[132m", end="")
-        format_mata_uang(totalPemasukan)
-        print("\033[0m")
+            print("Desember: ", end="")
+        print(f"{hijau_tebal}{format_mata_uang(total_pemasukan)}{default}")
     else:
-        print("\033[132mData Kosong\033[0m")
-    print("Ketik apapun untuk kembali ke menu awal.")
+        print(f"{kuning_tebal}Data Kosong{default}")
+    print("Tekan apapun untuk kembali ke menu awal.")
     getch()
 
 
 def rekapBulananKeluar(user):
     tanggalRekap = Tanggal(0, 0, 0)
     
-    print("Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023)>> ")
-    tanggalRekap.tahun = int(input("Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023)\n>>"))
-    print("Masukkan bulan yang ingin ditampilkan data rekapnya. (Silakan masukkan angkanya saja)")
+    print(f"{hijau_tebal}Masukkan tahun yang ingin ditampilkan data rekapnya. (Contoh: 2023){default}")
+    tanggalRekap.tahun = int(input(">> "))
+    print(f"{hijau_tebal}Masukkan bulan yang ingin ditampilkan data rekapnya. (Silakan masukkan angkanya saja){biru_laut}")
     print("1. Januari")
     print("2. Februari")
     print("3. Maret")
@@ -85,64 +86,62 @@ def rekapBulananKeluar(user):
     print("9. September")
     print("10. Oktober")
     print("11. November")
-    print("12. Desember")
+    print(f"12. Desember{default}")
     tanggalRekap.bulan = int(input(">> "))
     while tanggalRekap.bulan < 1 or tanggalRekap.bulan > 12:
-        print("Tolong masukkan angka yang valid")
+        print(f"{merah}Tolong masukkan angka yang valid{default}")
         tanggalRekap.bulan = int(input(">> "))
-    tanggalRekap.tahun=user.transaksi_keluar.waktu.tahun
 
     kategori = {"Makanan", "Transportasi", "Hiburan", "Tagihan", "Lain-lain"}
-    totalPengeluaran = 0
+    total_pengeluaran = 0
     ada_pengeluaran=False
     
-    print("\033[134m%-10s\t%-10s\t%s\t%s\033[0m", "Tanggal", "Nominal", "Sumber Dana", "Kategori")
-    for i in range(user.indeksKeluar):
-        if isSameMonth(tanggalRekap, user.transaksi_keluar[i].waktu):
-            print("%02d/%02d/%d\t", tanggalRekap.tanggal, tanggalRekap.bulan, tanggalRekap.tahun)
-            format_mata_uang(user.transaksi_keluar[i].nominal)
-            print("\t%s\t%s", "Dompet Digital" if user.transaksi_keluar[i].sumber_dana == 1 else "Bank", kategori[user.transaksi_keluar[i].kategori])
-            totalPengeluaran += user.transaksi_keluar[i].nominal
+    print((biru_tebal + "{0:10s}\t{1:20s}\t{2:15s}\t{3}" + default).format("Tanggal", "Nominal", "Kategori", "Sumber Dana"))
+    for transaksi in user.transaksi_keluar:
+        if isSameMonth(tanggalRekap, transaksi.waktu):
+            print((default + "{0:10s}\t{1:20s}\t{2:15s}\t{3}").format(re.sub(r', Pekan ke-\d+', '', transaksi.waktu.showTanggal()),
+                                                                      format_mata_uang(transaksi.nominal), transaksi.kategori,
+                                                                      transaksi.sumber_dana))
+            total_pengeluaran += transaksi.nominal
             ada_pengeluaran = True
     if ada_pengeluaran==True:
-        print("\033[134mTotal Pengeluaran pada Bulan ")
+        print(f"{biru_tebal}Total pengeluaran pada bulan ", end="")
         
         if tanggalRekap.bulan == 1:
-            print("Januari: \033[132m", end="")
+            print("Januari: ", end="")
         elif tanggalRekap.bulan == 2:
-            print("Februari: \033[132m", end="")
+            print("Februari: ", end="")
         elif tanggalRekap.bulan == 3:
-            print("Maret: \033[132m", end="")
+            print("Maret: ", end="")
         elif tanggalRekap.bulan == 4:
-            print("April: \033[132m", end="")
+            print("April: ", end="")
         elif tanggalRekap.bulan == 5:
-            print("Mei: \033[132m",end="")
+            print("Mei: ",end="")
         elif tanggalRekap.bulan == 6:
-            print("Juni: \033[132m", end="")
+            print("Juni: ", end="")
         elif tanggalRekap.bulan == 7:
-            print("Juli: \033[132m", end="")
+            print("Juli: ", end="")
         elif tanggalRekap.bulan == 8:
-            print("Agustus: \033[132m", end="")
+            print("Agustus: ", end="")
         elif tanggalRekap.bulan == 9:
-            print("September: \033[132m", end="")
+            print("September: ", end="")
         elif tanggalRekap.bulan == 10:
-            print("Oktober: \033[132m", end="")
+            print("Oktober: ", end="")
         elif tanggalRekap.bulan == 11:
-            print("November: \033[132m", end="")
+            print("November: ", end="")
         elif tanggalRekap.bulan == 12:
-            print("Desember: \033[132m", end="")
-        format_mata_uang(totalPengeluaran)
-        print("\033[0m")
+            print("Desember: ", end="")
+        print(f"{hijau_tebal}{format_mata_uang(total_pemasukan)}{default}")
     else:
-        print("\033[132mData Kosong\033[0m")
-    print("Ketik apapun untuk kembali ke menu awal.")
+        print(f"{kuning_tebal}Data Kosong{default}")
+    print("Tekan apapun untuk kembali ke menu awal.")
     getch()
 
 def tampil_menu_rekap_bulanan(user):
-    print("\033[134mPilihan Mode Rekap Bulanan:\033[0m")
-    print("\033[132m[1]\033[0m Rekap Bulanan Transaksi Masuk")
-    print("\033[132m[2]\033[0m Rekap Bulanan Transaksi Keluar")
-    choice = int(input("\033[134mPilih Mode: \033[0m"))
+    print(f"{kuning}Menu Rekap Harian{default}")
+    print(f"{hijau_tebal}1.{default} Rekap Bulanan Transaksi Masuk")
+    print(f"{hijau_tebal}2.{default} Rekap Bulanan Transaksi Keluar")
+    choice = int(input(f"{biru_tebal}Pilih: {default}"))
     if choice == 1:
         rekapBulananMasuk(user)
     else:
