@@ -2,7 +2,7 @@ import time
 import InputProcess as ip
 import os
 import pickle
-global_index = 0
+
 class Tanggal:
         def __init__(self, tahun, bulan, hari):
             self.hari = hari
@@ -121,8 +121,6 @@ class User:
         transaksi_masuk.showSuccess()
         transaksi_masuk.showMasuk()
         self.save_to_file()
-        global global_index
-        global_index += 1
         
     def transaksiKeluar(self):
         transaksi_keluar = ip.inputKeluar()
@@ -131,7 +129,6 @@ class User:
         transaksi_keluar.showSuccessOut()
         transaksi_keluar.showKeluar()
         self.save_to_file()
-        global_index +=1     
            
     def save_to_file(self):
         with open("User.DAT", "wb") as file:
@@ -154,39 +151,35 @@ class User:
         pilihan = int(input("Masukkan pilihan anda: "))
 
         if pilihan == 1:
-            if(global_index != 0):
-                self.read_from_file()
+            self.read_from_file()
             self.transaksiMasuk()
             
         elif pilihan == 2:
-            if (global_index != 0):
-                self.read_from_file()
+            self.read_from_file()
             self.transaksiKeluar()
             
 
     def showRiwayatMasuk(self):
-        print("RIWAYAT TRANSAKSI MASUK")
-        print("***********************")
         for transaksi in self.transaksi_masuk:
-            print(transaksi.showMasuk())
-        print("***********************")
+            print(f"{transaksi.showMasuk()}\n")
+        print("***********************\n")
+        
 
     def showRiwayatKeluar(self):
-        print("RIWAYAT TRANSAKSI Keluar")
-        print("************************")
         for transaksi in self.transaksi_keluar:
-            print(transaksi.showKeluar())
+            print(f"{transaksi.showKeluar()}\n")
         print("************************")
         
     def loadFullData(self):
         self.read_from_file()
-        print("\n========= \033[32mDETAIL TRANSAKSI\033[0m =========\n\n")
+        print("\n========= \033[32mDETAIL TRANSAKSI\033[0m =========\n")
         print(f"Jumlah Transaksi Masuk: {len(self.transaksi_masuk)}\n")
-        print(f"Jumlah Transaksi Keluar: {len(self.transaksi_keluar)}")
+        print(f"Jumlah Transaksi Keluar: {len(self.transaksi_keluar)}\n")
         
-        print("===== \033[32mTransaksi Masuk\033[0m =====\n\n")
-        self.showRiwayatMasuk()
-        
-        print("===== \033[32mTransaksi Keluar\033[0m =====\n\n")
-        self.showRiwayatKeluar
+        if(len(self.transaksi_masuk) > 0):
+            print("===== \033[32mTransaksi Masuk\033[0m =====\n")
+            self.showRiwayatMasuk()
+        if(len(self.transaksi_keluar) > 0):    
+            print("===== \033[32mTransaksi Keluar\033[0m =====\n")
+            self.showRiwayatKeluar()
         

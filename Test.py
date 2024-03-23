@@ -10,13 +10,8 @@ from Money import *
 
 
 user = User("Agus")
-user.catatTransaksi()
 
-# user.save_to_file()
+
 # user.showRiwayatMasuk()
-# user.showRiwayatKeluar()
+user.loadFullData()
 
-print(user.transaksi_masuk[0].nominal)
-
-# print(user.transaksi_keluar[0].nominal)
-# print(user.saldo.total)
